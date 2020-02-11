@@ -4,7 +4,7 @@ from samplebase import SampleBase
 
 class colorMatrix(SampleBase):
     def __init__(self, *args, **kwargs):
-        super(SimpleSquare, self).__init__(*args, **kwargs)
+        super(colorMatrix, self).__init__(*args, **kwargs)
 
     def run(self):
         offset_canvas = self.matrix.CreateFrameCanvas()
