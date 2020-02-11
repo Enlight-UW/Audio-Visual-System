@@ -12,7 +12,9 @@ class colorMatrix(SampleBase):
             for x in range(0, self.matrix.width):
                 offset_canvas.SetPixel(1, x, 255, 0, 0)
                 offset_canvas = self.matrix.SwapOnVSync(offset_canvas)
-            offset_canvas.SetPixel(1, x, 0, 0, 0)
+                
+            for x in range(0, self.matrix.width):
+                offset_canvas.SetPixel(1, x, 0, 0, 0)
 
 
 # Main function
