@@ -25,19 +25,19 @@ import javax.swing.JApplet;
 
 public class AudioVisualizer extends JApplet implements Runnable {
 
-	private boolean[][] grid;
-	private final static int SIZE = 20;
-	public static Rainbow rainbow;
-	private final static int DIMENSION = 32;
-	private ArrayList<Color> colorRow;
-	Clip clip;
-	long totalTime;
-	float[] heights;
-	int amplitude = 0;
-	int heightFrameLength = 0;
-	private final static long WAIT_MICROSECONDS = 40000;
-	HashMap<Integer, Long> frequencies;
-	private final static boolean volumeBased = false;
+	private boolean[][] grid; //determines if a light should be illuminated
+	private final static int SIZE = 20; //sets the size of each cell of the grid in the applet
+	public static Rainbow rainbow; //changes colors of the cells of the grid
+	private final static int DIMENSION = 32; //grid size
+	private ArrayList<Color> colorRow; //determines color of individual column 
+	Clip clip; //stores the song 
+	long totalTime;//total time of song in microseconds
+	float[] heights; //an array of heights for the columns (based on freq or volume)
+	int amplitude = 0; //column height when it's printed to the matrix
+	int heightFrameLength = 0; //how long each frame is
+	private final static long WAIT_MICROSECONDS = 40000; //stores the frequencies 
+	HashMap<Integer, Long> frequencies; //if visualizing based on volume 
+	private final static boolean volumeBased = false; //height of cols outputted 
 	int[] outputHeights;
 
 	//--------------------------------------------------------------
