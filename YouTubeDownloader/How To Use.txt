@@ -1,0 +1,4 @@
+Step 1) Find a YouTube Video
+Step 2) Make a file with the end of the link(the identifier) with .tdef at the end
+Step 3) Wait
+Step 4) Profit
