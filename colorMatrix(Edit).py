@@ -51,10 +51,12 @@ class colorMatrix(SampleBase):
                 # Using arraylist so you only need to make 1 new color at a time
                 if j == 0 and len(colorRow) >= self.matrix.width: # To save memory
                     colorRow.remove(0)
-                    colorRow.append(rainbow.nextColor())
+                    tempColor = rainbow.nextColor()
+                    colorRow.append(tempColor)
                     
                 elif len(colorRow) < self.matrix.width:
-                    colorRow.append(rainbow.nextColor())
+                    tempColor = rainbow.nextColor()
+                    colorRow.append(tempColor)
                     
                 color = colorRow[j]
                 
