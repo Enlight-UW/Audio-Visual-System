@@ -1,48 +1,49 @@
 #!/usr/bin/env python
 from samplebase import SampleBase
 
-class Rainbow:
-    g = 0
-    b = 0
-    r = 255
-    size = 1
-    step = 0
-    positive = True
+class Rainbow(object):
         
-    def updateColor(col):
-        if positive:
-            col += size
+    def updateColor(col, self):
+        if self.positive:
+            col += self.size
         else:
-            col -= size
+            col -= self.size
             
         if col <= 0 or col >= 255:
             if col < 0:
                 col = 0
             elif col > 255:
                 col = 255
-            step += 1 # Goes to the next step in the rainbow fade
-            positive = not positive # since each step adds or subtracts from the variable
-            if step >= 3: # loops the steps
-                step = 0
+            self.step += 1 # Goes to the next step in the rainbow fade
+            self.positive = not self.positive # since each step adds or subtracts from the variable
+            if self.step >= 3: # loops the steps
+                self.step = 0
         return col
     
     def nextColor(self):
-        if step == 0:
-            g = updateColor(g)
-        elif step == 1:
-            r = updateColor(r)
+        if self.step == 0:
+            self.g = self.updateColor(self.g)
+        elif self.step == 1:
+            self.r = self.updateColor(self.r)
         else:
-            b = updateColor(b)
+            self.b = self.updateColor(self.b)
             
-        return [r,g,b]
+        return [self.r,self.g,self.b]
         
 
 class colorMatrix(SampleBase):
+    g = 0
+    b = 0
+    r = 255
+    size = 1
+    step = 0
+    positive = True
     
     def __init__(self, *args, **kwargs):
         super(colorMatrix, self).__init__(*args, **kwargs)
 
     def run(self):
+        
         colorRow = [[0,0,0]]
         rainbow = Rainbow()
         offset_canvas = self.matrix.CreateFrameCanvas()
