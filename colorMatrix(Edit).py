@@ -56,7 +56,7 @@ class colorMatrix(SampleBase):
                 elif len(colorRow) < len(colorRow):
                     colorRow.add(rainbow.nextColor())
                     
-                color = colorRow.get(j)
+                color = colorRow[j]
                 
                 for i in range(self.matrix.width):
                     # if grid part is on
