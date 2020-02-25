@@ -38,12 +38,13 @@ class Rainbow:
         
 
 class colorMatrix(SampleBase):
-    colorRow = [[0,0,0]]
     
     def __init__(self, *args, **kwargs):
         super(colorMatrix, self).__init__(*args, **kwargs)
 
     def run(self):
+        colorRow = [[0,0,0]]
+        rainbow = Rainbow()
         offset_canvas = self.matrix.CreateFrameCanvas()
         while True: # Instead do while the 
             for j in range(self.matrix.width):
@@ -52,7 +53,7 @@ class colorMatrix(SampleBase):
                     colorRow.remove(0)
                     colorRow.add(rainbow.nextColor())
                     
-                elif len(colorRow) < DIMENSION:
+                elif len(colorRow) < len(colorRow):
                     colorRow.add(rainbow.nextColor())
                     
                 color = colorRow.get(j)
