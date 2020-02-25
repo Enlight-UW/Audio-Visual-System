@@ -26,7 +26,7 @@ class Rainbow:
                 step = 0
         return col
     
-    def nextColor():
+    def nextColor(self):
         if step == 0:
             g = updateColor(g)
         elif step == 1:
