@@ -53,7 +53,7 @@ class colorMatrix(SampleBase):
                     colorRow.remove(0)
                     colorRow.add(rainbow.nextColor())
                     
-                elif len(colorRow) < len(colorRow):
+                elif len(colorRow) < self.matrix.width:
                     colorRow.add(rainbow.nextColor())
                     
                 color = colorRow[j]
