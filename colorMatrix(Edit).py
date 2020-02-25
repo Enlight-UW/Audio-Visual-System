@@ -2,6 +2,12 @@
 from samplebase import SampleBase
 
 class Rainbow(object):
+    g = 0
+    b = 0
+    r = 255
+    size = 1
+    step = 0
+    positive = True
         
     def updateColor(col, self):
         if self.positive:
@@ -32,12 +38,6 @@ class Rainbow(object):
         
 
 class colorMatrix(SampleBase):
-    g = 0
-    b = 0
-    r = 255
-    size = 1
-    step = 0
-    positive = True
     
     def __init__(self, *args, **kwargs):
         super(colorMatrix, self).__init__(*args, **kwargs)
