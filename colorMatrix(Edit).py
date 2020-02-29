@@ -68,14 +68,15 @@ class colorMatrix(SampleBase):
 
     def turnPixelOn(x, maxY, self):
           # Using arraylist so you only need to make 1 new color at a time
-        if x == 0 and len(self.colorRow) >= self.matrix.width: # To save memory
+        if x == 0 and self.colorLen >= self.matrix.width: # To save memory
             self.colorRow.remove(0)
             tempColor = self.rainbow.nextColor()
             self.colorRow.append(tempColor)
             
-        elif len(self.colorRow) < self.matrix.width:
+        elif self.colorLen < self.matrix.width:
             tempColor = self.rainbow.nextColor()
             self.colorRow.append(tempColor)
+            self.colorLen += 1
             
         color = self.colorRow[x]
                 
@@ -91,6 +92,7 @@ class colorMatrix(SampleBase):
         self.offset_canvas = self.matrix.SwapOnVSync(self.offset_canvas)
 
     def run(self):
+        self.colorLen = 0
         self.offset_canvas = self.matrix.CreateFrameCanvas()
         while True: # Instead do while the 
             self.lastTime += 1# = int(clip.getMicrosecondPosition() / self.WAIT_MICROSECONDS)
