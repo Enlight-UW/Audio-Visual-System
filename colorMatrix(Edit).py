@@ -44,6 +44,8 @@ class colorMatrix(SampleBase):
     def __init__(self, *args, **kwargs):
         self.colorRow = []
         self.rainbow = Rainbow()
+        tempColor = self.rainbow.nextColor()
+        self.colorRow.append(tempColor)
         self.WAIT_MICROSECONDS = 20000
         self.volumeBased = False
         self.outputHeights = []
@@ -67,7 +69,12 @@ class colorMatrix(SampleBase):
             self.turnPixelOn(i, self.outputHeights[self.lastTime * self.matrix.width + i])
 
     def turnPixelOn(x, maxY, self):
-        if len(self.colorRow) < self.matrix.width:
+          # Using arraylist so you only need to make 1 new color at a time
+        if x == 0 and len(self.colorRow) >= self.matrix.width: # To save memory
+            self.colorRow.remove(0)
+            tempColor = self.rainbow.nextColor()
+            self.colorRow.append(tempColor)
+        elif len(self.colorRow) < self.matrix.width:
             tempColor = self.rainbow.nextColor()
             self.colorRow.append(tempColor)
             
