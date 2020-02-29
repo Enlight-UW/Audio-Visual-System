@@ -39,7 +39,7 @@ class snake(object):
     def updateScreen(self):
         self.gameScreen = [[0]*31]*31
 
-        for x in range(0, len(se.fsnakeBody)-1):
+        for x in range(0, len(self.snakeBody)-1):
             self.gameScreen[self.snakeBody[x][0]][self.snakeBody[x][1]] = 1
 
         self.gameScreen[self.currentDotX][self.currentDotY] = 1
