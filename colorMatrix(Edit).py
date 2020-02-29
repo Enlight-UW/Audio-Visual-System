@@ -19,7 +19,8 @@ class Rainbow(object):
                 lines = line.split(",")
         
         for line in lines:
-            self.outputHeights.append(int(line))
+            if len(line) > 0:
+                self.outputHeights.append(int(line))
         
     def updateColor(col, self):
         if self.positive:
