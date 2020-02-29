@@ -73,8 +73,7 @@ class colorMatrix(SampleBase):
             self.colorRow.remove(0)
             tempColor = self.rainbow.nextColor()
             self.colorRow.append(tempColor)
-            
-        elif not self.maxedColors:
+        else:
             tempColor = self.rainbow.nextColor()
             self.colorRow.append(tempColor)
             self.colorLen += 1
