@@ -47,7 +47,7 @@ class snake(object):
 
 
     def updateSnake(self):
-        for x in range(0, len(snakeBody)-1):
+        for x in range(0, len(self.snakeBody)-1):
             self.snakeBody[x+1] = self.snakeBody[x]
 
         self.snakeBody[0] = [self.snakeX, self.snakeY]
