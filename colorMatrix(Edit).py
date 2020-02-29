@@ -13,7 +13,7 @@ class Rainbow(object):
         self.setUpTestOutputs()
         
     def setUpTestOutputs(self):
-        file = open("./test(Dynasty).txt/","r")
+        file = open("test(Dynasty).txt","r")
         with file as rl:
             for line in rl.readlines():
                 lines = line.split(",")
