@@ -11,16 +11,6 @@ class Rainbow(object):
         self.step = 0
         self.positive = True
         
-    def setUpTestOutputs(self):
-        file = open("test(Dynasty).txt","r")
-        with file as rl:
-            for line in rl.readlines():
-                lines = line.split(",")
-        
-        for line in lines:
-            if len(line) > 0:
-                self.outputHeights.append(int(line))
-        
     def updateColor(col, self):
         if self.positive:
             col += self.size
@@ -56,7 +46,21 @@ class colorMatrix(SampleBase):
         self.rainbow = Rainbow()
         self.WAIT_MICROSECONDS = 20000
         self.volumeBased = False
+        self.outputHeights = []
+        self.setUpTestOutputs()
+        self.lastTime = 0
         super(colorMatrix, self).__init__(*args, **kwargs)
+        
+        
+    def setUpTestOutputs(self):
+        file = open("test(Dynasty).txt","r")
+        with file as rl:
+            for line in rl.readlines():
+                lines = line.split(",")
+        
+        for line in lines:
+            if len(line) > 0:
+                self.outputHeights.append(int(line))
 
     def updateImageFB(self):
         for i in range(self.matrix.width):
@@ -88,9 +92,6 @@ class colorMatrix(SampleBase):
         offset_canvas = self.matrix.SwapOnVSync(offset_canvas)
 
     def run(self):
-        self.outputHeights = []
-        self.setUpTestOutputs()
-        self.lastTime = 0
         while True: # Instead do while the 
             self.lastTime += 1# = int(clip.getMicrosecondPosition() / self.WAIT_MICROSECONDS)
             
