@@ -68,12 +68,12 @@ class colorMatrix(SampleBase):
 
     def turnPixelOn(x, maxY, self):
           # Using arraylist so you only need to make 1 new color at a time
-        if x == 0 and self.colorLen >= self.matrix.width: # To save memory
+        if x == 0 and int(self.colorLen) >= self.matrix.width: # To save memory
             self.colorRow.remove(0)
             tempColor = self.rainbow.nextColor()
             self.colorRow.append(tempColor)
             
-        elif self.colorLen < self.matrix.width:
+        elif int(self.colorLen) < self.matrix.width:
             tempColor = self.rainbow.nextColor()
             self.colorRow.append(tempColor)
             self.colorLen += 1
