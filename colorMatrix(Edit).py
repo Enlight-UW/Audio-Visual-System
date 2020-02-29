@@ -7,7 +7,7 @@ class Rainbow(object):
         self.g = 0
         self.b = 0
         self.r = 255
-        self.size = 1
+        self.size = 10
         self.step = 0
         self.positive = True
         
@@ -101,7 +101,7 @@ class colorMatrix(SampleBase):
             #else:
             self.updateImageFB()
                 
-            self.usleep(self.WAIT_MICROSECONDS)
+            #self.usleep(self.WAIT_MICROSECONDS)
                     
 
 # Main function
