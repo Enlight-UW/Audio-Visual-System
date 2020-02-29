@@ -11,7 +11,7 @@ class Rainbow(object):
         self.step = 0
         self.positive = True
         
-    def updateColor(col, self):
+    def updateColor(self, col):
         if self.positive:
             col += self.size
         else:
@@ -44,8 +44,6 @@ class colorMatrix(SampleBase):
     def __init__(self, *args, **kwargs):
         self.colorRow = []
         self.rainbow = Rainbow()
-        tempColor = self.rainbow.nextColor()
-        self.colorRow.append(tempColor)
         self.WAIT_MICROSECONDS = 20000
         self.volumeBased = False
         self.outputHeights = []
@@ -68,12 +66,13 @@ class colorMatrix(SampleBase):
         for i in range(self.matrix.width):
             self.turnPixelOn(i, self.outputHeights[self.lastTime * self.matrix.width + i])
 
-    def turnPixelOn(x, maxY, self):
+    def turnPixelOn(self, x, maxY):
           # Using arraylist so you only need to make 1 new color at a time
         if x == 0 and len(self.colorRow) >= self.matrix.width: # To save memory
             self.colorRow.remove(0)
             tempColor = self.rainbow.nextColor()
             self.colorRow.append(tempColor)
+            
         elif len(self.colorRow) < self.matrix.width:
             tempColor = self.rainbow.nextColor()
             self.colorRow.append(tempColor)
