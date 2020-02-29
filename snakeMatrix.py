@@ -79,15 +79,15 @@ class snake(object):
 
 
     def checkDotEat(self):
-        if((snakeX == currentDotX) & (snakeY == currentDotY)):
+        if((self.snakeX == self.currentDotX) & (self.snakeY == self.currentDotY)):
             self.snakeBody.append([-1,-1])
             self.currentDotX = (random.random() * 100) % 32
             self.currentDotY = (random.random() * 100) % 32
         return
 
     def checkUserDeath(self):
-        for x in range(0, len(snakeBody)):
-            if ((snakeX == snakeBody[x][0]) | (snakeY == snakeBody[x][1])):
+        for x in range(0, len(self.snakeBody)):
+            if ((self.snakeX == self.snakeBody[x][0]) | (self.snakeY == self.snakeBody[x][1])):
                 self.alive = False
         return
 
