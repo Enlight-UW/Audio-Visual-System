@@ -10,8 +10,6 @@ class Rainbow(object):
         self.size = 1
         self.step = 0
         self.positive = True
-        self.outputHeights = []
-        self.setUpTestOutputs()
         
     def setUpTestOutputs(self):
         file = open("test(Dynasty).txt","r")
@@ -90,6 +88,8 @@ class colorMatrix(SampleBase):
         offset_canvas = self.matrix.SwapOnVSync(offset_canvas)
 
     def run(self):
+        self.outputHeights = []
+        self.setUpTestOutputs()
         self.lastTime = 0
         while True: # Instead do while the 
             self.lastTime += 1# = int(clip.getMicrosecondPosition() / self.WAIT_MICROSECONDS)
