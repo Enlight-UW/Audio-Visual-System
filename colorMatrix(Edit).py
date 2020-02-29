@@ -9,6 +9,7 @@ class Rainbow(object):
         self.size = 1
         self.step = 0
         self.positive = True
+        self.lastTime = 0
         self.outputHeights = []
         self.setUpTestOutputs()
         
