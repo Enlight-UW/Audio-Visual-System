@@ -3,13 +3,13 @@ from samplebase import SampleBase
 
 class Rainbow(object):
     def __init__(self):
+        self.lastTime = 0
         self.g = 0
         self.b = 0
         self.r = 255
         self.size = 1
         self.step = 0
         self.positive = True
-        self.lastTime = 0
         self.outputHeights = []
         self.setUpTestOutputs()
         
@@ -90,6 +90,7 @@ class colorMatrix(SampleBase):
         offset_canvas = self.matrix.SwapOnVSync(offset_canvas)
 
     def run(self):
+        self.lastTime = 0
         while True: # Instead do while the 
             self.lastTime += 1# = int(clip.getMicrosecondPosition() / self.WAIT_MICROSECONDS)
             
