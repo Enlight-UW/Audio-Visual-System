@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from samplebase import SampleBase
 import random
-import msvcrt
+import keyboard
 
 class snake(object):
 
@@ -55,23 +55,22 @@ class snake(object):
 
 
     def getUserInput(self):
-        if msvcrt.kbhit():
-            
-            key = msvcrt.getch()
+
+        key = keyboard.read_key()
         
-        if key == "b'w'":
+        if key == "w":
             print("W was pressed!")
             self.snakeYdelta = 1
             self.snakeXdelta = 0
-        elif key == "b'w'":
+        elif key == "a":
             print("a was pressed!")
             self.snakeYdelta = 0
             self.snakeXdelta = -1
-        elif key == "b'w'":
+        elif key == "s":
             print("s was pressed!")
             self.snakeYdelta = -1
             self.snakeXdelta = 0
-        elif key == "b'w'":
+        elif key == "d":
             print("d was pressed!")
             self.snakeYdelta = 0
             self.snakeXdelta = 1
