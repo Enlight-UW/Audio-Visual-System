@@ -98,20 +98,21 @@ class snake(object):
 class colorMatrix(SampleBase):
 
     def __init__(self, *args, **kwargs):
+        self.snake = snake()
         super(colorMatrix, self).__init__(*args, **kwargs)
 
     #
     def run(self):
 
         #create virtual matrix
-        snake = snake()
+        
         offset_canvas = self.matrix.CreateFrameCanvas()
         tmp_matrix = snake.getGameScreen
 
         #forever
         while True:
-            snake.cycle()
-            tmp_matrix = snake.getGameScreen
+            self.snake.cycle()
+            tmp_matrix = self.snake.getGameScreen()
             color = 0
 
             for x in range(0, self.matrix.width):
