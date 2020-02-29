@@ -2,12 +2,24 @@
 from samplebase import SampleBase
 
 class Rainbow(object):
-    g = 0
-    b = 0
-    r = 255
-    size = 1
-    step = 0
-    positive = True
+    def __init__(self):
+        self.g = 0
+        self.b = 0
+        self.r = 255
+        self.size = 1
+        self.step = 0
+        self.positive = True
+        self.outputHeights = []
+        self.setUpTestOutputs()
+        
+    def setUpTestOutputs(self):
+        file = open("./test(Dynasty).txt/","r")
+        with file as rl:
+            for line in rl.readlines():
+                lines = line.split(",")
+        
+        for line in lines:
+            self.outputHeights.append(int(line))
         
     def updateColor(col, self):
         if self.positive:
@@ -40,31 +52,52 @@ class Rainbow(object):
 class colorMatrix(SampleBase):
     
     def __init__(self, *args, **kwargs):
+        self.colorRow = []
+        self.rainbow = Rainbow()
+        self.WAIT_MICROSECONDS = 20000
+        self.volumeBased = False
         super(colorMatrix, self).__init__(*args, **kwargs)
 
-    def run(self):
-        
-        colorRow = [[0,0,0]]
-        rainbow = Rainbow()
+    def updateImageFB(self):
+        for i in range(self.matrix.width):
+            self.turnPixelOn(i, self.outputHeights[self.lastTime * self.matrix.width + i])
+
+    def turnPixelOn(x, maxY, self):
         offset_canvas = self.matrix.CreateFrameCanvas()
-        while True: # Instead do while the 
-            for j in range(self.matrix.width):
-                # Using arraylist so you only need to make 1 new color at a time
-                if j == 0 and len(colorRow) >= self.matrix.width: # To save memory
-                    colorRow.remove(0)
-                    tempColor = rainbow.nextColor()
-                    colorRow.append(tempColor)
-                    
-                elif len(colorRow) < self.matrix.width:
-                    tempColor = rainbow.nextColor()
-                    colorRow.append(tempColor)
-                    
-                color = colorRow[j]
+          # Using arraylist so you only need to make 1 new color at a time
+        if x == 0 and len(self.colorRow) >= self.matrix.width: # To save memory
+            self.colorRow.remove(0)
+            tempColor = self.rainbow.nextColor()
+            self.colorRow.append(tempColor)
+            
+        elif len(self.colorRow) < self.matrix.width:
+            tempColor = self.rainbow.nextColor()
+            self.colorRow.append(tempColor)
+            
+        color = self.colorRow[x]
                 
-                for i in range(self.matrix.width):
-                    # if grid part is on
-                    offset_canvas.SetPixel(i, j, color[0], color[1], color[2])
-                    offset_canvas = self.matrix.SwapOnVSync(offset_canvas)
+        if maxY > self.matrix.width:
+            maxY = self.matrix.width
+            
+        for y in range(self.matrix.width):
+            if y < maxY:
+                offset_canvas.SetPixel(self.matrix.width - 1 - y, x, color[0], color[1], color[2])
+            else:
+                offset_canvas.SetPixel(self.matrix.width - 1 - y, x, 0, 0, 0)
+                
+        offset_canvas = self.matrix.SwapOnVSync(offset_canvas)
+
+    def run(self):
+        while True: # Instead do while the 
+            self.lastTime += 1# = int(clip.getMicrosecondPosition() / self.WAIT_MICROSECONDS)
+            
+                #delay from processing the data. Also maybe from slow Java GUI
+            #if self.volumeBased:
+            #    updateImageVB()
+            #else:
+            self.updateImageFB()
+                
+            self.usleep(self.WAIT_MICROSECONDS)
                     
 
 # Main function
