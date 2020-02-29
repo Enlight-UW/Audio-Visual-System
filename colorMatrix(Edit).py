@@ -87,7 +87,7 @@ class colorMatrix(SampleBase):
             
         for y in range(self.matrix.width):
             if y < maxY:
-                self.offset_canvas.SetPixel(self.matrix.width - 1 - y, x, color[0], color[1], color[2])
+                self.offset_canvas.SetPixel(self.matrix.width - 1 - y, x, color[0], color[1], 255)
             else:
                 self.offset_canvas.SetPixel(self.matrix.width - 1 - y, x, 0, 0, 0)
                 
