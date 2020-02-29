@@ -33,8 +33,11 @@ class Rainbow(object):
             self.g = self.updateColor(self.g)
         elif self.step == 1:
             self.r = self.updateColor(self.r)
-        else:
+        elif self.step == 2:
             self.b = self.updateColor(self.b)
+        else:
+            self.step = 0
+            self.nextColor()
             
         return [self.r,self.g,self.b]
         
