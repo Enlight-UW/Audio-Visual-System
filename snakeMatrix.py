@@ -12,8 +12,8 @@ class snake(object):
         self.snakeY = 16
         self.snakeXdelta = 1
         self.snakeYdelta = 0
-        self.oldXdelta = startXdelta
-        self.oldYdelta = startYdelta
+        self.oldXdelta = self.startXdelta
+        self.oldYdelta = self.startYdelta
         self.alive = True;
 
         self.currentDotX = 5
@@ -27,8 +27,8 @@ class snake(object):
             checkDotEat()
             getUserInput()
 
-            self.snakeX += snakeXdelta
-            self.snakeY += snakeYdelta
+            self.snakeX += self.snakeXdelta
+            self.snakeY += self.snakeYdelta
 
             checkUserDeath()
             updateSnake()
@@ -40,9 +40,9 @@ class snake(object):
         self.gameScreen = [[0]*31]*31
 
         for x in range(0, len(snakeBody)-1):
-            self.gameScreen[snakeBody[x][0]][snakeBody[x][1]] = 1
+            self.gameScreen[self.snakeBody[x][0]][self.snakeBody[x][1]] = 1
 
-        self.gameScreen[currentDotX][currentDotY] = 1
+        self.gameScreen[self.currentDotX][self.currentDotY] = 1
         return
 
 
