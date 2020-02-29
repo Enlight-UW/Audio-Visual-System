@@ -24,15 +24,15 @@ class snake(object):
     def cycle(self):
 
         if(self.alive):
-            checkDotEat()
-            getUserInput()
+            self.checkDotEat()
+            self.getUserInput()
 
             self.snakeX += self.snakeXdelta
             self.snakeY += self.snakeYdelta
 
-            checkUserDeath()
-            updateSnake()
-            updateScreen()
+            self.checkUserDeath()
+            self.updateSnake()
+            self.updateScreen()
 
         return
 
