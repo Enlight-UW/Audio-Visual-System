@@ -25,7 +25,7 @@ class snake(object):
 
         if(self.alive):
             self.checkDotEat()
-            self.getUserInput()
+            #self.getUserInput()
 
             self.snakeX += self.snakeXdelta
             self.snakeY += self.snakeYdelta
@@ -54,7 +54,7 @@ class snake(object):
         return
 
 
-    def getUserInput(self):
+    '''def getUserInput(self):
 
         key = keyboard.read_key()
         
@@ -75,7 +75,7 @@ class snake(object):
             self.snakeYdelta = 0
             self.snakeXdelta = 1
 
-        return
+        return'''
 
 
     def checkDotEat(self):
