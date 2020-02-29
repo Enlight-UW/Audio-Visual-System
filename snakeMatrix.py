@@ -12,8 +12,8 @@ class snake(object):
         self.snakeY = 16
         self.snakeXdelta = 1
         self.snakeYdelta = 0
-        self.oldXdelta = self.startXdelta
-        self.oldYdelta = self.startYdelta
+        self.oldXdelta = self.snakeXdelta
+        self.oldYdelta = self.snakeYdelta
         self.alive = True;
 
         self.currentDotX = 5
