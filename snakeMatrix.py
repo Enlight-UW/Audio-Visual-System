@@ -6,7 +6,7 @@ import time
 class snake(object):
 
     def __init__(self):
-        self.gameScreen = [[0]*31]*31
+        self.gameScreen = []
 
         self.snakeX = 16
         self.snakeY = 16
@@ -27,8 +27,8 @@ class snake(object):
             self.checkDotEat()
             #self.getUserInput()
 
-            self.snakeX += self.snakeXdelta
-            self.snakeY += self.snakeYdelta
+            self.snakeX = (self.snakeX + self.snakeXdelta)%32
+            self.snakeY = (self.snakeY + self.snakeYdelta)%32
 
             self.checkUserDeath()
             self.updateSnake()
@@ -37,14 +37,15 @@ class snake(object):
         return
 
     def updateScreen(self):
-        self.gameScreen = [[0]*31]*31
+        self.gameScreen = [[0 for x in range(32)] for y in range(32)]
 
         #for each element of the snake body, draw a 1 on the matrix        
-        '''for x in range(0, len(self.snakeBody)-1):
+        for x in range(0, len(self.snakeBody)):
             self.gameScreen[self.snakeBody[x][0]][self.snakeBody[x][1]] = 1
-        '''
+        
         #draw the pellet
-        self.gameScreen[self.currentDotX][self.currentDotY] = 1
+        #self.gameScreen[self.currentDotX][self.currentDotY] = 1
+        self.gameScreen[5][5] = 1
         return
 
 
@@ -88,7 +89,7 @@ class snake(object):
         return
 
     def checkUserDeath(self):
-        for x in range(0, len(self.snakeBody)):
+        for x in range(1, len(self.snakeBody)):
             if ((self.snakeX == self.snakeBody[x][0]) | (self.snakeY == self.snakeBody[x][1])):
                 self.alive = False
         return
@@ -106,7 +107,6 @@ class colorMatrix(SampleBase):
 
     def run(self):
 
-        print("STARTING UP!!!")
         #create virtual matrix
         
         offset_canvas = self.matrix.CreateFrameCanvas()
@@ -118,16 +118,14 @@ class colorMatrix(SampleBase):
             tmp_matrix = self.snake.getGameScreen()
             color = 0
 
-            for x in range(0, self.matrix.width-1):
-                for y in range(0, self.matrix.height-1):
+            for x in range(0, self.matrix.width):
+                for y in range(0, self.matrix.height):
                     #column, row, red, blue, green
                     color = tmp_matrix[x][y]
                     offset_canvas.SetPixel(x, y, 255*color, 0, 0)
-                    print(str(color) + ",", end = '')
-                print('\n', end = "")
 
             offset_canvas = self.matrix.SwapOnVSync(offset_canvas)
-            time.sleep(100)
+            print("End of Cycle!")
 
 # Main function
 if __name__ == "__main__":
