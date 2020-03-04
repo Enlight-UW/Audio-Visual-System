@@ -8,17 +8,17 @@ import tty
 
 def _find_getch():
 
-	def _getch():
-		fd = sys.stdin.fileno()
-		old_settings = termios.tcgettr(fd)
-		try:
-			tty.setraw(fd)
-			ch = sys.stdin.read(1)
-		finally:
-			termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-		return ch
+        def _getch():
+                fd = sys.stdin.fileno()
+                old_settings = termios.tcgettr(fd)
+                try:
+                        tty.setraw(fd)
+                        ch = sys.stdin.read(1)
+                finally:
+                        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+                return ch
 
-	return _getch
+        return _getch
 
 class snake(object):
 
@@ -75,10 +75,10 @@ class snake(object):
 
 
     def getUserInput(self):
-	
-	char = _find_getch()
-	print(char) 
-	return
+        
+        char = _find_getch()
+        print(char) 
+        return
 
 
     def checkDotEat(self):
