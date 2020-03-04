@@ -6,19 +6,46 @@ import termios
 import sys
 import tty
 
-def _find_getch():
+#def _find_getch():
 
-        def _getch():
-                fd = sys.stdin.fileno()
-                old_settings = termios.tcgettr(fd)
-                try:
-                        tty.setraw(fd)
-                        ch = sys.stdin.read(1)
-                finally:
-                        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-                return ch
+'''
+def _getch():
+	fd = sys.stdin.fileno()
+	old_settings = termios.tcgetattr(fd)
+	try:
+		tty.setraw(fd)
+		ch = sys.stdin.read(1)
+	finally:
+		termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+	return ch
+'''
 
-        return _getch
+old_settings=None
+
+def init_anykey():
+	global old_settings
+	old_settings = termios.tcgetattr(sys.stdin)
+	new_settings = termios.tcgetattr(sys.stdin)
+	new_settings[3] = new_settings[3] & ~(termios.ECHO | termios.ICANON) # lflags
+	new_settings[6][termios.VMIN] = 0  # cc
+	new_settings[6][termios.VTIME] = 0 # cc
+	termios.tcsetattr(sys.stdin, termios.TCSADRAIN, new_settings)
+
+#@atexit.register
+def term_anykey():
+	global old_settings
+	if old_settings:
+		termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
+
+def anykey():
+	ch_set = []
+	ch = os.read(sys.stdin.fileno(), 1)
+	while ch != None and len(ch) > 0:
+		ch_set.append( ord(ch[0]) )
+		ch = os.read(sys.stdin.fileno(), 1)
+	return ch_set;
+
+#return _getch
 
 class snake(object):
 
@@ -42,7 +69,7 @@ class snake(object):
 
         if(self.alive):
             self.checkDotEat()
-            #self.getUserInput()
+            self.getUserInput()
 
             self.snakeX = (self.snakeX + self.snakeXdelta)%32
             self.snakeY = (self.snakeY + self.snakeYdelta)%32
@@ -61,8 +88,8 @@ class snake(object):
             self.gameScreen[self.snakeBody[x][0]][self.snakeBody[x][1]] = 1
         
         #draw the pellet
-        #self.gameScreen[self.currentDotX][self.currentDotY] = 1
-        self.gameScreen[5][5] = 1
+        self.gameScreen[self.currentDotX][self.currentDotY] = 1
+
         return
 
 
@@ -76,8 +103,13 @@ class snake(object):
 
     def getUserInput(self):
         
-        char = _find_getch()
-        print(char) 
+	key = anykey()
+	if key == None:
+		print("nothing")
+	elif key == '^c':
+		self.alive = False
+	elif key == 'w':
+		print("got a w!")
         return
 
 
@@ -125,7 +157,7 @@ class colorMatrix(SampleBase):
                     offset_canvas.SetPixel(x, y, 255*color, 0, 0)
 
             offset_canvas = self.matrix.SwapOnVSync(offset_canvas)
-            print("End of Cycle!")
+
 
 # Main function
 if __name__ == "__main__":
