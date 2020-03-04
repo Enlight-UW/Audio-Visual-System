@@ -131,4 +131,4 @@ if __name__ == "__main__":
     mat = colorMatrix()
 
     if (not mat.process()):
-print('broked')
+        print('broked')
