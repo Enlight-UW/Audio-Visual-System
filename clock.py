@@ -53,10 +53,10 @@ class colorMatrix(SampleBase):
             numMatrix.append([4, 5])
             for i in range(9):
                 numMatrix.append([4, i]) # line down
-            for i in range(3):
-                numMatrix.append([i + 1, 3 - i]) # diagonal top
-                numMatrix.append([i + 1, 4 - i]) # diagonal below
-                numMatrix.append([i + 1, 5]) # line across
+            for i in range(4):
+                numMatrix.append([i, 3 - i]) # diagonal top
+                numMatrix.append([i, 4 - i]) # diagonal below
+                numMatrix.append([i, 5]) # line across
         elif num == 5:
             for i in range(5):
                 numMatrix.append([i, 0]) # top line
