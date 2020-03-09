@@ -143,6 +143,5 @@ class colorMatrix(SampleBase):
 # Main function
 if __name__ == "__main__":
     mat = colorMatrix()
-    mat.run()
     if (not mat.process()):
                 print('broked')
