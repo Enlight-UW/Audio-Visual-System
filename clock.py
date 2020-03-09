@@ -106,12 +106,12 @@ class colorMatrix(SampleBase):
     def getTimeMat(self, num, x_offset):
         time_matrix = []
         for pos in self.getNumber(int(num/10)): # first num
-            pos[0] += 8
-            pos[1] += 8 + x_offset
+            pos[1] += 8
+            pos[0] += 8 + x_offset
             time_matrix.append(pos)
                 
         for pos in self.getNumber(int(num%10)): # Second num
-            pos[0] += 8 + 6 + x_offset # 6 for the 2nd number
+            pos[0] += 14 + x_offset # 6 for the 2nd number
             pos[1] += 8
             time_matrix.append(pos)
             
