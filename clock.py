@@ -130,13 +130,13 @@ class colorMatrix(SampleBase):
         for pos in self.getTimeMat(hour, 0):
             """Not sure if x, y or y, x, doesn't really matter if the matrix 
             can be tilted either way"""
-            self.offset_canvas.SetPixel(pos[1], 32 - pos[0], 255, 255, 255)
+            self.offset_canvas.SetPixel(pos[1], 31 - pos[0], 255, 255, 255)
             
-        self.offset_canvas.SetPixel(15, 14, 255, 255, 255)
-        self.offset_canvas.SetPixel(15, 18, 255, 255, 255)
+        self.offset_canvas.SetPixel(14, 16, 255, 255, 255)
+        self.offset_canvas.SetPixel(18, 16, 255, 255, 255)
             
         for pos in self.getTimeMat(minute, 16):
-            self.offset_canvas.SetPixel(pos[1], 32 - pos[0], 255, 255, 255)
+            self.offset_canvas.SetPixel(pos[1], 31 - pos[0], 255, 255, 255)
                 
         self.offset_canvas = self.matrix.SwapOnVSync(self.offset_canvas)
 
