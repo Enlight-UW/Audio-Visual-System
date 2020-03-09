@@ -106,18 +106,22 @@ class colorMatrix(SampleBase):
     def getTimeMat(self, num, x_offset):
         time_matrix = []
         for pos in self.getNumber(int(num/10)): # first num
+            pos[0] += 5 + x_offset
             pos[1] += 12
-            pos[0] += 4 + x_offset
             time_matrix.append(pos)
                 
         for pos in self.getNumber(int(num%10)): # Second num
-            pos[0] += 11 + x_offset # 6 for the 2nd number
+            pos[0] += 12 + x_offset # 6 for the 2nd number
             pos[1] += 12
             time_matrix.append(pos)
             
         return time_matrix
     
     def updateTime(self):
+        for i in range(32):
+            for j in range(32):
+                self.offset_canvas.SetPixel(i, j, 0, 0, 0)
+        
         time = datetime.datetime.now()
         hour = time.hour % 12
         minute = time.minute
