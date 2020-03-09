@@ -132,10 +132,10 @@ class colorMatrix(SampleBase):
             can be tilted either way"""
             self.offset_canvas.SetPixel(pos[0], pos[1], 255, 255, 255)
             
-        self.offset_canvas.SetPixel(14, 14, 255, 255, 255)
-        self.offset_canvas.SetPixel(14, 18, 255, 255, 255)
+        self.offset_canvas.SetPixel(15, 14, 255, 255, 255)
+        self.offset_canvas.SetPixel(15, 18, 255, 255, 255)
             
-        for pos in self.getTimeMat(minute, 15):
+        for pos in self.getTimeMat(minute, 16):
             self.offset_canvas.SetPixel(pos[0], pos[1], 255, 255, 255)
                 
         self.offset_canvas = self.matrix.SwapOnVSync(self.offset_canvas)
