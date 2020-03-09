@@ -106,7 +106,7 @@ class colorMatrix(SampleBase):
     def getTimeMat(self, num, x_offset):
         time_matrix = []
         for pos in self.getNumber(int(num/10)): # first num
-            pos[0] += 5 + x_offset
+            pos[0] += 2 + x_offset
             pos[1] += 12
             time_matrix.append(pos)
                 
@@ -132,8 +132,8 @@ class colorMatrix(SampleBase):
             can be tilted either way"""
             self.offset_canvas.SetPixel(pos[0], pos[1], 255, 255, 255)
             
-        self.offset_canvas.SetPixel(16, 14, 255, 255, 255)
-        self.offset_canvas.SetPixel(16, 18, 255, 255, 255)
+        self.offset_canvas.SetPixel(14, 14, 255, 255, 255)
+        self.offset_canvas.SetPixel(14, 18, 255, 255, 255)
             
         for pos in self.getTimeMat(minute, 13):
             self.offset_canvas.SetPixel(pos[0], pos[1], 255, 255, 255)
