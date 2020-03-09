@@ -54,9 +54,9 @@ class colorMatrix(SampleBase):
             for i in range(9):
                 numMatrix.append([4, i]) # line down
             for i in range(3):
-                numMatrix.append([i, 3 - i]) # diagonal top
-                numMatrix.append([i, 4 - i]) # diagonal below
-                numMatrix.append([i, 5]) # line across
+                numMatrix.append([i + 1, 3 - i]) # diagonal top
+                numMatrix.append([i + 1, 4 - i]) # diagonal below
+                numMatrix.append([i + 1, 5]) # line across
         elif num == 5:
             for i in range(5):
                 numMatrix.append([i, 0]) # top line
@@ -106,12 +106,12 @@ class colorMatrix(SampleBase):
     def getTimeMat(self, num, x_offset):
         time_matrix = []
         for pos in self.getNumber(int(num/10)): # first num
-            pos[1] += 8
+            pos[1] += 12
             pos[0] += 4 + x_offset
             time_matrix.append(pos)
                 
         for pos in self.getNumber(int(num%10)): # Second num
-            pos[0] += 11 + x_offset # 6 for the 2nd number
+            pos[0] += 15 + x_offset # 6 for the 2nd number
             pos[1] += 8
             time_matrix.append(pos)
             
