@@ -106,13 +106,13 @@ class colorMatrix(SampleBase):
     def getTimeMat(self, num, x_offset):
         time_matrix = []
         for pos in self.getNumber(int(num/10)): # first num
-            pos[1] += 4
+            pos[1] += 8
             pos[0] += 4 + x_offset
             time_matrix.append(pos)
                 
         for pos in self.getNumber(int(num%10)): # Second num
-            pos[0] += 10 + x_offset # 6 for the 2nd number
-            pos[1] += 4
+            pos[0] += 11 + x_offset # 6 for the 2nd number
+            pos[1] += 8
             time_matrix.append(pos)
             
         return time_matrix
@@ -127,6 +127,9 @@ class colorMatrix(SampleBase):
             """Not sure if x, y or y, x, doesn't really matter if the matrix 
             can be tilted either way"""
             self.offset_canvas.SetPixel(pos[0], pos[1], 255, 255, 255)
+            
+        self.offset_canvas.SetPixel(16, 15, 255, 255, 255)
+        self.offset_canvas.SetPixel(16, 17, 255, 255, 255)
             
         for pos in self.getTimeMat(minute, 13):
             self.offset_canvas.SetPixel(pos[0], pos[1], 255, 255, 255)
