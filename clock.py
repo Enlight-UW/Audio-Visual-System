@@ -111,7 +111,7 @@ class colorMatrix(SampleBase):
             time_matrix.append(pos)
                 
         for pos in self.getNumber(int(num%10)): # Second num
-            pos[0] += 12 + x_offset # 6 for the 2nd number
+            pos[0] += 9 + x_offset # 6 for the 2nd number
             pos[1] += 12
             time_matrix.append(pos)
             
@@ -135,7 +135,7 @@ class colorMatrix(SampleBase):
         self.offset_canvas.SetPixel(14, 14, 255, 255, 255)
         self.offset_canvas.SetPixel(14, 18, 255, 255, 255)
             
-        for pos in self.getTimeMat(minute, 13):
+        for pos in self.getTimeMat(minute, 15):
             self.offset_canvas.SetPixel(pos[0], pos[1], 255, 255, 255)
                 
         self.offset_canvas = self.matrix.SwapOnVSync(self.offset_canvas)
