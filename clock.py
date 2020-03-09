@@ -6,9 +6,6 @@ import datetime
 class colorMatrix(SampleBase):
     
     def __init__(self, *args, **kwargs):
-        # 5 per number(4 numbers) + 4 spaces + 1 colon + 1 since 0 start, 32x32
-        self.offset_x = 32 - 26
-        self.offset_y = 8 # 9 height of number - 1 since 0 start
         super(colorMatrix, self).__init__(*args, **kwargs)
         
     def getNumber(self, num):
@@ -120,7 +117,7 @@ class colorMatrix(SampleBase):
     def updateTime(self):
         for i in range(32):
             for j in range(32):
-                self.offset_canvas.SetPixel(i, j, 0, 0, 0)
+                self.offset_canvas.SetPixel(i, j, 0, 255, 0)
         
         time = datetime.datetime.now()
         hour = time.hour % 12
@@ -138,6 +135,11 @@ class colorMatrix(SampleBase):
         for pos in self.getTimeMat(minute, 16):
             self.offset_canvas.SetPixel(pos[1], 31 - pos[0], 255, 255, 255)
                 
+            
+        for i in range(30):
+            self.offset_canvas.SetPixel(i, 31, 0, 0, 0)
+            self.offset_canvas.SetPixel(i, 29, 0, 0, 0)
+            
         self.offset_canvas = self.matrix.SwapOnVSync(self.offset_canvas)
 
     def run(self):
