@@ -111,8 +111,8 @@ class colorMatrix(SampleBase):
             time_matrix.append(pos)
                 
         for pos in self.getNumber(int(num%10)): # Second num
-            pos[0] += 15 + x_offset # 6 for the 2nd number
-            pos[1] += 8
+            pos[0] += 11 + x_offset # 6 for the 2nd number
+            pos[1] += 12
             time_matrix.append(pos)
             
         return time_matrix
