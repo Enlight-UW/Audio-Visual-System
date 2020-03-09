@@ -6,17 +6,20 @@ import datetime
 class colorMatrix(SampleBase):
     
     def __init__(self, *args, **kwargs):
+        # 5 per number(4 numbers) + 4 spaces + 1 colon + 1 since 0 start, 32x32
+        self.offset_x = 32 - 26
+        self.offset_y = 8 # 9 height of number - 1 since 0 start
         super(colorMatrix, self).__init__(*args, **kwargs)
         
     def getNumber(self, num):
         numMatrix = [] #5 x 9
         if num == 0:
             for i in range(3):
-                numMatrix.append([0, i + 1])
-                numMatrix.append([8, i + 1])
-            for i in range(7):
                 numMatrix.append([i + 1, 0])
-                numMatrix.append([i + 1, 4])
+                numMatrix.append([i + 1, 8])
+            for i in range(7):
+                numMatrix.append([0, i + 1])
+                numMatrix.append([4, i + 1])
         elif num == 1:
             numMatrix.append([1, 0]) # top part
             #numMatrix.append([2, 7])
@@ -72,9 +75,61 @@ class colorMatrix(SampleBase):
                 numMatrix.append([i + 1, 4]) # mid line
                 numMatrix.append([i + 1, 8]) # bot line
                 numMatrix.append([4, i + 5]) # right line
+        elif num == 7:
+            numMatrix.append([4, 1])
+            for i in range(5):
+                numMatrix.append([i, 0]) # Top line
+            for i in range(3): # Diagonal line
+                numMatrix.append([0, 6 + i])
+                numMatrix.append([1, 4 + i])
+                numMatrix.append([2, 2 + i])
+                numMatrix.append([3, 1 + i])
+        elif num == 8:
+            for i in range(3):
+                numMatrix.append([i + 1, 0])
+                numMatrix.append([i + 1, 4])
+                numMatrix.append([i + 1, 8])
+                numMatrix.append([0, i + 1])
+                numMatrix.append([0, i + 5])
+                numMatrix.append([4, i + 1])
+                numMatrix.append([4, i + 5])
+        elif num == 9:
+            for i in range(3):
+                numMatrix.append([i + 1, 0])
+                numMatrix.append([i + 1, 4])
+                numMatrix.append([0, i + 1])
+            for i in range(8):
+                numMatrix.append([4, i + 1])
+                
+        return numMatrix
+    
+    def getTimeMat(self, num, x_offset):
+        time_matrix = []
+        for pos in self.getNumber(int(num/10)): # first num
+            pos[0] += self.offset_y
+            pos[1] += self.offset_x + x_offset
+            time_matrix.append(pos)
+                
+        for pos in self.getNumber(int(num%10)): # Second num
+            pos[0] += self.offset_x + 6 + x_offset # 6 for the 2nd number
+            pos[1] += self.offset_y
+            time_matrix.append(pos)
+            
+        return time_matrix
     
     def updateTime(self):
-        #self.offset_canvas.SetPixel(self.matrix.width - 1 - y, x, 0, 0, 0)
+        time = datetime.datetime.now()
+        hour = time.hour % 12
+        minute = time.minute
+        
+        # Keep track of previous matrix
+        for pos in self.getTimeMat(hour, 0):
+            """Not sure if x, y or y, x, doesn't really matter if the matrix 
+            can be tilted either way"""
+            self.offset_canvas.SetPixel(pos[0], pos[1], 255, 255, 255)
+            
+        for pos in self.getTimeMat(minute, 13):
+            self.offset_canvas.SetPixel(pos[0], pos[1], 255, 255, 255)
                 
         self.offset_canvas = self.matrix.SwapOnVSync(self.offset_canvas)
 
@@ -88,5 +143,6 @@ class colorMatrix(SampleBase):
 # Main function
 if __name__ == "__main__":
     mat = colorMatrix()
+    mat.run()
     if (not mat.process()):
                 print('broked')
