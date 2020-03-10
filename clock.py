@@ -117,7 +117,7 @@ class colorMatrix(SampleBase):
     def updateTime(self):
         for i in range(32):
             for j in range(32):
-                self.offset_canvas.SetPixel(i, j, 0, 155, 0)
+                self.offset_canvas.SetPixel(i, j, 0, 200, 0)
         
         time = datetime.datetime.now()
         hour = time.hour % 12
@@ -140,10 +140,10 @@ class colorMatrix(SampleBase):
             
         for j in range(3):
             for i in range(30):
-                if i < second:
-                    self.offset_canvas.SetPixel(28 + j, i + 1, 0, 0, 0)
-                else:
+                if i <= second:
                     self.offset_canvas.SetPixel(28 + j, i + 1, 255, 0, 0)
+                else:
+                    self.offset_canvas.SetPixel(28 + j, i + 1, 0, 0, 0)
                 
             
         self.offset_canvas = self.matrix.SwapOnVSync(self.offset_canvas)
